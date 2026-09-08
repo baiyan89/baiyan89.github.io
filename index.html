@@ -134,14 +134,13 @@ html[lang="zh-CN"] .lang-zh { display: revert; }
 </div>
 <script type="text/javascript">
 var journalMetrics = {
-  'Swarm and Evolutionary Computation': '9.6',
-  'Expert Systems with Applications': '9.4',
-  'IEEE Transactions on Microwave Theory and Techniques': '5.2',
-  'IEEE Transactions on Emerging Topics in Computational Intelligence': '6.5',
-  'IEEE Transactions on Evolutionary Computation': '12.0',
-  'IEEE Transactions on Cybernetics': '10.5',
-  'Applied Soft Computing': '7.8',
-  'Information Sciences': '6.0'
+  'Swarm and Evolutionary Computation': { tier: 'jcr', impactFactor: '9.6' },
+  'Expert Systems with Applications': { tier: 'cas', impactFactor: '9.4' },
+  'IEEE Transactions on Microwave Theory and Techniques': { tier: 'jcr', impactFactor: '5.2' },
+  'IEEE Transactions on Evolutionary Computation': { tier: 'cas', impactFactor: '15.9' },
+  'IEEE Transactions on Cybernetics': { tier: 'cas', impactFactor: '11.3' },
+  'Applied Soft Computing': { tier: 'jcr', impactFactor: '7.8' },
+  'Information Sciences': { tier: 'jcr', impactFactor: '6.0' }
 };
 
 function addJournalMetrics() {
@@ -151,13 +150,15 @@ function addJournalMetrics() {
     if (!journal || !journalMetrics[journal.textContent]) {
       continue;
     }
-    var impactFactor = journalMetrics[journal.textContent];
+    var metric = journalMetrics[journal.textContent];
+    var englishTier = metric.tier === 'cas' ? 'CAS Tier 1' : 'JCR Q1';
+    var chineseTier = metric.tier === 'cas' ? '中科院一区' : 'JCR一区';
     var english = document.createElement('span');
     var chinese = document.createElement('span');
     english.className = 'journal-metric lang-en';
     chinese.className = 'journal-metric lang-zh';
-    english.textContent = '(JCR Q1, Impact Factor: ' + impactFactor + ')';
-    chinese.textContent = '（JCR一区，影响因子：' + impactFactor + '）';
+    english.textContent = '(' + englishTier + ', Impact Factor: ' + metric.impactFactor + ')';
+    chinese.textContent = '（' + chineseTier + '，影响因子：' + metric.impactFactor + '）';
     papers[i].appendChild(english);
     papers[i].appendChild(chinese);
   }
