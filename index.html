@@ -137,6 +137,7 @@ var journalMetrics = {
   'Swarm and Evolutionary Computation': { tier: 'jcr', impactFactor: '9.6' },
   'Expert Systems with Applications': { tier: 'cas', impactFactor: '9.4' },
   'IEEE Transactions on Microwave Theory and Techniques': { tier: 'jcr', impactFactor: '5.2' },
+  'IEEE Transactions on Emerging Topics in Computational Intelligence': { tier: 'jcr2', impactFactor: '6.0' },
   'IEEE Transactions on Evolutionary Computation': { tier: 'cas', impactFactor: '15.9' },
   'IEEE Transactions on Cybernetics': { tier: 'cas', impactFactor: '11.3' },
   'Applied Soft Computing': { tier: 'jcr', impactFactor: '7.8' },
@@ -151,8 +152,8 @@ function addJournalMetrics() {
       continue;
     }
     var metric = journalMetrics[journal.textContent];
-    var englishTier = metric.tier === 'cas' ? 'CAS Tier 1' : 'JCR Q1';
-    var chineseTier = metric.tier === 'cas' ? '中科院一区' : 'JCR一区';
+    var englishTier = metric.tier === 'cas' ? 'CAS Tier 1' : (metric.tier === 'jcr2' ? 'JCR Q2' : 'JCR Q1');
+    var chineseTier = metric.tier === 'cas' ? '中科院一区' : (metric.tier === 'jcr2' ? 'JCR二区' : 'JCR一区');
     var english = document.createElement('span');
     var chinese = document.createElement('span');
     english.className = 'journal-metric lang-en';
