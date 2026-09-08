@@ -26,6 +26,7 @@ html[lang="en"] .supervision-group p { text-align: justify; text-justify: inter-
 .supervision-group { margin-bottom: 18px; }
 .supervision-group > p { margin-bottom: 4px; }
 .supervision-group ul { margin-top: 0; }
+.journal-metric { display: inline-block; margin-left: 5px; padding: 1px 7px; border-radius: 4px; background: #fff1b8; color: #8a4b08; font-weight: 600; }
 a { color: #1769aa; }
 .lang-zh { display: none; }
 html[lang="zh-CN"] .lang-en { display: none; }
@@ -153,10 +154,10 @@ function addJournalMetrics() {
     var impactFactor = journalMetrics[journal.textContent];
     var english = document.createElement('span');
     var chinese = document.createElement('span');
-    english.className = 'lang-en';
-    chinese.className = 'lang-zh';
-    english.textContent = ' (JCR Q1, Impact Factor ' + impactFactor + ')';
-    chinese.textContent = '（JCR一区，影响因子' + impactFactor + '）';
+    english.className = 'journal-metric lang-en';
+    chinese.className = 'journal-metric lang-zh';
+    english.textContent = '(JCR Q1, Impact Factor: ' + impactFactor + ')';
+    chinese.textContent = '（JCR一区，影响因子：' + impactFactor + '）';
     papers[i].appendChild(english);
     papers[i].appendChild(chinese);
   }
