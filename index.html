@@ -132,12 +132,43 @@ html[lang="zh-CN"] .lang-zh { display: revert; }
 <div class="footer"><span class="lang-en">Last update: 9/08/2026</span><span class="lang-zh">最后更新：2026年9月8日</span></div>
 </div>
 <script type="text/javascript">
+var journalMetrics = {
+  'Swarm and Evolutionary Computation': '9.6',
+  'Expert Systems with Applications': '9.4',
+  'IEEE Transactions on Microwave Theory and Techniques': '5.2',
+  'IEEE Transactions on Emerging Topics in Computational Intelligence': '6.5',
+  'IEEE Transactions on Evolutionary Computation': '12.0',
+  'IEEE Transactions on Cybernetics': '10.5',
+  'Applied Soft Computing': '7.8',
+  'Information Sciences': '6.0'
+};
+
+function addJournalMetrics() {
+  var papers = document.querySelectorAll('#layout-content > p');
+  for (var i = 0; i !== papers.length; i++) {
+    var journal = papers[i].querySelector('i');
+    if (!journal || !journalMetrics[journal.textContent]) {
+      continue;
+    }
+    var impactFactor = journalMetrics[journal.textContent];
+    var english = document.createElement('span');
+    var chinese = document.createElement('span');
+    english.className = 'lang-en';
+    chinese.className = 'lang-zh';
+    english.textContent = ' (JCR Q1, Impact Factor ' + impactFactor + ')';
+    chinese.textContent = '（JCR一区，影响因子' + impactFactor + '）';
+    papers[i].appendChild(english);
+    papers[i].appendChild(chinese);
+  }
+}
+
 function toggleLanguage() {
   var showChinese = document.documentElement.lang !== 'zh-CN';
   document.documentElement.lang = showChinese ? 'zh-CN' : 'en';
   document.documentElement.setAttribute('xml:lang', showChinese ? 'zh-CN' : 'en');
   document.getElementById('language-toggle').textContent = showChinese ? 'English' : '中文';
 }
+addJournalMetrics();
 </script>
 </body>
 </html>
